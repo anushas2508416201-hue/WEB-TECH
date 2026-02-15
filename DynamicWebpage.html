@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dynamic Webpage with DOM & jQuery</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+body {
+font-family: Arial, sans-serif;
+text-align: center;
+background: linear-gradient(to right, #667eea, #764ba2);
+color: white;
+padding: 50px;
+}
+.box {
+width: 300px;
+margin: 20px auto;
+padding: 20px;
+background: white;
+color: black;
+border-radius: 10px;
+}
+button {
+padding: 10px 20px;
+margin: 10px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-weight: bold;
+}
+.btn1 { background: #ff6b6b; color: white; }
+.btn2 { background: #4ecdc4; color: white; }
+.btn3 { background: #ffe66d; }
+.btn4 { background: #1a535c; color: white; }
+</style>
+</head>
+<body>
+<h1>Dynamic Webpage with DOM & jQuery</h1>
+<div class="box" id="contentBox">
+<p id="text">Click a button to change me!</p>
+</div>
+<button class="btn1" onclick="changeContent()">Change Content</button>
+<button class="btn2" id="hideBtn">Hide</button>
+<button class="btn3" id="toggleBtn">Toggle</button>
+<button class="btn4" id="animateBtn">Animate</button>
+<script>
+function changeContent() {
+document.getElementById("text").innerHTML = "Content Updated Successfully using JavaScript
+DOM!";
+
+}
+$(document).ready(function() {
+$("#hideBtn").click(function() {
+$("#contentBox").hide(1000);
+});
+$("#toggleBtn").click(function() {
+$("#contentBox").toggle(1000);
+});
+$("#animateBtn").click(function() {
+$("#contentBox").animate({
+width: "400px",
+height: "150px",
+opacity: 0.5
+}, 1000);
+});
+});
+</script>
+</body>
+</html>

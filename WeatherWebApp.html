@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Weather App</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #e3f2fd;
+text-align: center;
+padding: 40px;
+}
+.weather-box {
+background: white;
+padding: 20px;
+width: 300px;
+margin: auto;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+input {
+padding: 8px;
+width: 80%;
+}
+button {
+padding: 8px 15px;
+margin-top: 10px;
+cursor: pointer;
+}
+h3 {
+margin-top: 15px;
+}
+</style>
+</head>
+<body>
+<h2>Real-Time Weather Application</h2>
+<div class="weather-box">
+<input type="text" id="city" placeholder="Enter city name">
+<br><br>
+<button onclick="getWeather()">Get Weather</button>
+<div id="result"></div>
+</div>
+<script>
+function getWeather() {
+const city = document.getElementById("city").value;
+const apiKey = "ee14d55c1ec245e693a124142261402";
+
+const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+fetch(url)
+.then(response => response.json())
+.then(data => {
+document.getElementById("result").innerHTML = `
+<h3>${data.location.name}</h3>
+<p>Temperature: ${data.current.temp_c} °C</p>
+<p>Humidity: ${data.current.humidity} %</p>
+<p>Weather: ${data.current.condition.text}</p>
+`;
+})
+.catch(error => {
+document.getElementById("result").innerHTML = "Error fetching data!";
+});
+}
+</script>
+</body>
+</html>

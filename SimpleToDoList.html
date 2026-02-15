@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dynamic To-Do List</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: "Segoe UI", sans-serif;
+}
+body {
+height: 100vh;
+background: linear-gradient(135deg, #667eea, #764ba2);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.todo-container {
+background: #ffffff;
+width: 33vw;
+min-width: 420px;
+min-height: 65vh;
+padding: 35px;
+border-radius: 20px;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+animation: fadeIn 0.8s ease-in-out;
+}
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: translateY(40px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+h2 {
+text-align: center;
+margin-bottom: 30px;
+font-size: 32px;
+color: #333;
+}
+.input-area {
+display: flex;
+gap: 15px;
+
+margin-bottom: 30px;
+}
+input {
+flex: 1;
+padding: 14px;
+font-size: 18px;
+border-radius: 10px;
+border: 2px solid #ddd;
+outline: none;
+transition: 0.3s;
+}
+input:focus {
+border-color: #667eea;
+}
+button {
+background: #667eea;
+border: none;
+color: white;
+padding: 14px 18px;
+font-size: 18px;
+border-radius: 10px;
+cursor: pointer;
+transition: 0.3s;
+}
+button:hover {
+background: #5a6fd6;
+transform: scale(1.08);
+}
+ul {
+list-style: none;
+margin-top: 10px;
+max-height: 45vh;
+overflow-y: auto;
+}
+li {
+background: #f4f6fb;
+padding: 16px;
+margin-bottom: 14px;
+border-radius: 12px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 18px;
+transition: 0.3s;
+cursor: pointer;
+}
+li:hover {
+background: #e6e9f5;
+}
+li.completed {
+text-decoration: line-through;
+color: #888;
+
+background: #d7f5e6;
+}
+.delete-btn {
+background: #ff4d4d;
+border: none;
+color: white;
+padding: 8px 14px;
+font-size: 16px;
+border-radius: 8px;
+cursor: pointer;
+transition: 0.3s;
+}
+.delete-btn:hover {
+background: #e63939;
+transform: scale(1.1);
+}
+ul::-webkit-scrollbar {
+width: 6px;
+}
+ul::-webkit-scrollbar-thumb {
+background: #667eea;
+border-radius: 10px;
+}
+</style>
+</head>
+<body>
+<div class="todo-container">
+<h2>📝 My To-Do List</h2>
+<div class="input-area">
+<input type="text" id="taskInput" placeholder="Add a new task...">
+<button onclick="addTask()">Add</button>
+</div>
+<ul id="taskList"></ul>
+</div>
+<script>
+function addTask() {
+let taskInput = document.getElementById("taskInput");
+let taskText = taskInput.value.trim();
+if (taskText === "") {
+alert("Please enter a task!");
+return;
+}
+let li = document.createElement("li");
+li.textContent = taskText;
+li.addEventListener("click", function () {
+li.classList.toggle("completed");
+});
+
+let deleteBtn = document.createElement("button");
+deleteBtn.textContent = "Delete";
+deleteBtn.className = "delete-btn";
+deleteBtn.onclick = function (e) {
+e.stopPropagation();
+li.remove();
+};
+li.appendChild(deleteBtn);
+document.getElementById("taskList").appendChild(li);
+taskInput.value = "";
+}
+</script>
+</body>
+</html>
