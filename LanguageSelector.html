@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Country State Language Translator</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    padding: 30px;
+}
+.box {
+    background: white;
+    padding: 20px;
+    width: 420px;
+    border-radius: 8px;
+}
+select, textarea, button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px;
+}
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h3>Language Translator</h3>
+
+    <textarea id="inputText" placeholder="Enter English text"></textarea>
+
+    <!-- Country -->
+    <select id="country" onchange="loadStates()">
+        <option value="">Select Country</option>
+        <option value="india">India</option>
+    </select>
+
+    <!-- State -->
+    <select id="state" onchange="setLanguage()">
+        <option value="">Select State</option>
+    </select>
+
+    <!-- Language (auto-filled) -->
+    <select id="language">
+        <option value="">Language</option>
+    </select>
+
+    <button onclick="translateText()">Translate</button>
+
+    <textarea id="outputText" placeholder="Translated text"></textarea>
+</div>
+
+<script>
+function loadStates() {
+    const state = document.getElementById("state");
+    state.innerHTML = `<option value="">Select State</option>`;
+
+    if (document.getElementById("country").value === "india") {
+        state.innerHTML += `
+            <option value="up">Uttar Pradesh</option>
+            <option value="ka">Karnataka</option>
+            <option value="tn">Tamil Nadu</option>
+            <option value="ts">Telangana</option>
+        `;
+    }
+}
+
+function setLanguage() {
+    const lang = document.getElementById("language");
+    const state = document.getElementById("state").value;
+
+    lang.innerHTML = `<option value="">Language</option>`;
+
+    if (state === "up") lang.innerHTML += `<option value="hi-IN">Hindi</option>`;
+    if (state === "ka") lang.innerHTML += `<option value="kn-IN">Kannada</option>`;
+    if (state === "tn") lang.innerHTML += `<option value="ta-IN">Tamil</option>`;
+    if (state === "ts") lang.innerHTML += `<option value="te-IN">Telugu</option>`;
+}
+
+function translateText() {
+    const text = document.getElementById("inputText").value;
+    const lang = document.getElementById("language").value;
+
+    if (!text || !lang) {
+        alert("Please select country, state and language");
+        return;
+    }
+
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|${lang}`;
+
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("outputText").value =
+                data.responseData.translatedText;
+        })
+        .catch(() => alert("Translation failed"));
+}
+</script>
+
+</body>
+</html>
+ 
