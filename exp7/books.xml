@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="books.xsl"?>
+
+<bookstore>
+    <book>
+        <title>Web Programming</title>
+        <author>John Smith</author>
+        <price>450</price>
+    </book>
+
+    <book>
+        <title>Learning XML</title>
+        <author>Erik Brown</author>
+        <price>550</price>
+    </book>
+
+    <book>
+        <title>HTML and CSS</title>
+        <author>David Lee</author>
+        <price>350</price>
+    </book>
+</bookstore>

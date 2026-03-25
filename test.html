@@ -1,55 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Webpage with jQuery Effects</title>
 
-    <title>Student Registration</title>
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Embedded CSS -->
-    <style>
-        h2 {
-            text-align: center;
-            color: #2c3e50;
-            text-transform: uppercase;
-        }
-
-        label {
-            font-weight: bold;
-            text-transform: capitalize;
-        }
-    </style>
+<style>
+#box{
+width:200px;
+height:200px;
+background-color:skyblue;
+margin-top:20px;
+text-align:center;
+line-height:200px;
+font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
-<div class="form-container">
+<h2 id="title">Welcome to My Webpage</h2>
 
-    <h2 style="letter-spacing: 2px;">Student Registration</h2> <!-- Inline CSS -->
+<button onclick="changeContent()">Change Content</button>
+<button id="hideBtn">Hide</button>
+<button id="showBtn">Show</button>
+<button id="toggleBtn">Toggle</button>
+<button id="animateBtn">Animate</button>
 
-    <form>
+<div id="box">BOX</div>
 
-        <label>Name</label>
-        <input type="text" placeholder="Enter your name">
+<script>
 
-        <label>Email</label>
-        <input type="email" placeholder="Enter your email">
+// JavaScript DOM content update
+function changeContent(){
+document.getElementById("title").innerHTML="Content Updated using JavaScript DOM!";
+}
 
-        <label>Gender</label>
-        <select>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-        </select>
+// jQuery effects
+$(document).ready(function(){
 
-        <button type="submit">Register</button>
+$("#hideBtn").click(function(){
+$("#box").hide();
+});
 
-    </form>
+$("#showBtn").click(function(){
+$("#box").show();
+});
 
-</div>
+$("#toggleBtn").click(function(){
+$("#box").toggle();
+});
+
+$("#animateBtn").click(function(){
+$("#box").animate({
+left:'250px',
+height:'250px',
+width:'250px'
+});
+});
+
+});
+
+</script>
 
 </body>
 </html>
